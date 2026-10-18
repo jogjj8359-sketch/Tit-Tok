@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>QasinoTok</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ================= APP SHELL ================= -->
+  <div id="app">
+
+    <!-- ============ TOP BAR ============ -->
+    <header class="topbar" id="topbar">
+      <button class="icon-btn" id="btnSearchToggle" title="Іздеу">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      </button>
+      <div class="brand">
+        <span class="brand-q">Q</span>asino<span class="brand-tok">Tok</span>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" id="btnUploadTop" title="Жүктеу">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <button class="icon-btn" id="btnMessagesTop" title="Хабарламалар">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 8.5-8.5 8.38 8.38 0 0 1 8.5 8.5z"/></svg>
+          <span class="badge" id="msgBadge">3</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============ SEARCH OVERLAY ============ -->
+    <div class="search-overlay" id="searchOverlay">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Іздеу: адамдар, хэштегтер, видеолар..." />
+        <button class="icon-btn" id="btnSearchClose">
+          <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+
+    <!-- ============ MAIN CONTENT ============ -->
+    <main id="main">
+
+      <!-- ===== FEED PAGE ===== -->
+      <section class="page page-feed active" id="page-feed">
+        <!-- Feed tabs -->
+        <div class="feed-tabs">
+          <button class="feed-tab active" data-feed="for-you">Ұсыныстар</button>
+          <button class="feed-tab" data-feed="following">Жазылымдар</button>
+          <button class="feed-tab" data-feed="trends">Трендтер</button>
+        </div>
+
+        <!-- Video feed -->
+        <div class="video-feed" id="videoFeed">
+          <!-- Videos injected by JS -->
+        </div>
+
+        <!-- Side quick actions (desktop) -->
+        <div class="side-rail">
+          <button class="side-btn" data-page="home" title="Басты бет">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </button>
+          <button class="side-btn" data-page="search" title="Іздеу">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+          </button>
+          <button class="side-btn" data-page="upload" title="Жүктеу">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <button class="side-btn" data-page="messages" title="Хабарламалар">
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 8.5-8.5 8.38 8.38 0 0 1 8.5 8.5z"/></svg>
+          </button>
+          <button class="side-btn" data-page="profile" title="Профиль">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0 1 14 0v1"/></svg>
+          </button>
+        </div>
+
+        <!-- Mobile bottom nav -->
+        <nav class="bottom-nav">
+          <button class="nav-btn active" data-page="home">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Басты</span>
+          </button>
+          <button class="nav-btn" data-page="search">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+            <span>Іздеу</span>
+          </button>
+          <button class="nav-btn nav-upload" data-page="upload">
+            <span class="upload-plus">+</span>
+          </button>
+          <button class="nav-btn" data-page="messages">
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 8.5-8.5 8.38 8.38 0 0 1 8.5 8.5z"/></svg>
+            <span>Хабар</span>
+          </button>
+          <button class="nav-btn" data-page="profile">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0 1 14 0v1"/></svg>
+            <span>Профиль</span>
+          </button>
+        </nav>
+      </section>
+
+      <!-- ===== UPLOAD PAGE ===== -->
+      <section class="page page-upload" id="page-upload">
+        <div class="page-header">
+          <button class="back-btn" data-page="home">←</button>
+          <h2>Видео жүктеу</h2>
+        </div>
+        <div class="upload-wrap">
+          <div class="upload-drop" id="uploadDrop">
+            <svg viewBox="0 0 24 24" class="upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <p>Видео файлын таңдаңыз немесе осында сүйреп әкеліңіз</p>
+            <span class="upload-hint">MP4, WebM, MOV • 9:16 формат ұсынылады</span>
+            <input type="file" id="videoFileInput" accept="video/*" hidden />
+            <button class="btn-primary" id="btnPickFile">Файл таңдау</button>
+          </div>
+
+          <div class="upload-preview" id="uploadPreview" hidden>
+            <video id="previewVideo" controls playsinline></video>
+            <button class="btn-secondary" id="btnChangeVideo">Басқа видео таңдау</button>
+          </div>
+
+          <div class="upload-form">
+            <div class="form-group">
+              <label>Сипаттама</label>
+              <textarea id="uploadCaption" rows="3" placeholder="Видео туралы жазыңыз... #хэштег"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Музыка атауы</label>
+              <input type="text" id="uploadMusic" placeholder="Мысалы: Original Sound — QasinoTok" />
+            </div>
+            <div class="form-group">
+              <label>Көрінуі</label>
+              <select id="uploadPrivacy">
+                <option value="public">Барлығына</option>
+                <option value="followers">Тек жазылушыларға</option>
+                <option value="private">Тек өзіме</option>
+              </select>
+            </div>
+            <button class="btn-primary btn-publish" id="btnPublish">Жариялау</button>
+            <p class="upload-note">MVP нұсқасында видео тек осы браузерде сақталады (localStorage + blob URL).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== MESSAGES PAGE ===== -->
+      <section class="page page-messages" id="page-messages">
+        <div class="page-header">
+          <button class="back-btn" data-page="home">←</button>
+          <h2>Хабарламалар</h2>
+        </div>
+        <div class="messages-list" id="messagesList"></div>
+      </section>
+
+      <!-- ===== PROFILE PAGE ===== -->
+      <section class="page page-profile" id="page-profile">
+        <div class="page-header profile-header">
+          <button class="back-btn" data-page="home">←</button>
+          <h2 id="profileTitle">Профиль</h2>
+          <button class="icon-btn" id="btnEditProfile" title="Өңдеу">
+            <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+          </button>
+        </div>
+
+        <div class="profile-info">
+          <img id="profileAvatar" class="profile-avatar" src="" alt="avatar" />
+          <h3 id="profileName">@user</h3>
+          <p id="profileBio" class="profile-bio"></p>
+          <div class="profile-stats">
+            <div class="stat"><strong id="statFollowing">0</strong><span>Жазылған</span></div>
+            <div class="stat"><strong id="statFollowers">0</strong><span>Жазылушы</span></div>
+            <div class="stat"><strong id="statLikes">0</strong><span>Лайк</span></div>
+          </div>
+          <div class="profile-actions">
+            <button class="btn-primary" id="btnFollowProfile">Жазылу</button>
+            <button class="btn-secondary" id="btnEditProfile2">Профильді өңдеу</button>
+          </div>
+        </div>
+
+        <div class="profile-videos" id="profileVideos"></div>
+      </section>
+
+      <!-- ===== HASHTAG / TRENDS PAGE ===== -->
+      <section class="page page-trends" id="page-trends">
+        <div class="page-header">
+          <button class="back-btn" data-page="home">←</button>
+          <h2>Трендтер</h2>
+        </div>
+        <div class="trends-list" id="trendsList"></div>
+      </section>
+
+    </main>
+
+    <!-- ============ COMMENTS PANEL ============ -->
+    <div class="panel-overlay" id="commentsOverlay">
+      <div class="panel comments-panel">
+        <div class="panel-header">
+          <h3>Пікірлер (<span id="commentCount">0</span>)</h3>
+          <button class="icon-btn" id="btnCommentsClose">
+            <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="comments-list" id="commentsList"></div>
+        <form class="comment-form" id="commentForm">
+          <input type="text" id="commentInput" placeholder="Пікір қалдыру..." autocomplete="off" />
+          <button type="submit" class="btn-send">
+            <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ============ SHARE PANEL ============ -->
+    <div class="panel-overlay" id="shareOverlay">
+      <div class="panel share-panel">
+        <div class="panel-header">
+          <h3>Бөлісу</h3>
+          <button class="icon-btn" id="btnShareClose">
+            <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="share-grid">
+          <button class="share-item" data-share="copy">
+            <div class="share-icon">🔗</div><span>Сілтемені көшіру</span>
+          </button>
+          <button class="share-item" data-share="telegram">
+            <div class="share-icon">✈️</div><span>Telegram</span>
+          </button>
+          <button class="share-item" data-share="whatsapp">
+            <div class="share-icon">💬</div><span>WhatsApp</span>
+          </button>
+          <button class="share-item" data-share="native">
+            <div class="share-icon">📤</div><span>Басқа</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ EDIT PROFILE MODAL ============ -->
+    <div class="panel-overlay" id="editProfileOverlay">
+      <div class="panel edit-panel">
+        <div class="panel-header">
+          <h3>Профильді өңдеу</h3>
+          <button class="icon-btn" id="btnEditClose">
+            <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="edit-form">
+          <div class="form-group">
+            <label>Аты</label>
+            <input type="text" id="editName" />
+          </div>
+          <div class="form-group">
+            <label>Аватар URL</label>
+            <input type="text" id="editAvatar" placeholder="https://..." />
+          </div>
+          <div class="form-group">
+            <label>Өзі туралы</label>
+            <textarea id="editBio" rows="2"></textarea>
+          </div>
+          <button class="btn-primary" id="btnSaveProfile">Сақтау</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ TOAST ============ -->
+    <div class="toast" id="toast"></div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
